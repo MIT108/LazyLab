@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::prefix('auth')->group(function () {
+    Route::post('/register', [CustomerController::class, 'registerApi'])->name('customer.registration');
+    Route::post('/login', [CustomerController::class, 'loginApi'])->name('customer.login');
+
+    Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+        Route::get('/logout', [CustomerController::class, 'logoutApi'])->name('customer.logout');
+    });
+});
+

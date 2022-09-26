@@ -15,6 +15,16 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('password');
+            $table->string('phone');
+            $table->string('school');
+            $table->string('dob');
+            $table->string('status')->default('active');
+            $table->foreignId('classroom_id')->constrained()->onDelete('cascade')->onDelete('cascade');
+            $table->foreignId('customer_type_id')->constrained()->onDelete('cascade')->onDelete('cascade');
+            $table->text('about_me')->nullable();
             $table->timestamps();
         });
     }

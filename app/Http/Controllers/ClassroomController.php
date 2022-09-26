@@ -125,10 +125,10 @@ class ClassroomController extends Controller
 
     public function viewClassroom($id)
     {
-        $classroom = Classroom::with('role')->find($id);
+        $classroom = Classroom::with('subject')->find($id);
         // dd($classroom);
         if ($classroom) {
-            return view('laravel-examples/view-classroom')
+            return view('/pages/classroom/view-classroom')
                 ->with('classroom', $classroom);
         } else {
             return redirect()->route('dashboard')->with('error', 'this classroom does not exist');
