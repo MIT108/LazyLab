@@ -59,18 +59,11 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <form action="/create-subject" method="post" enctype="multipart/form-data">
+                <form action="/classroom-detail" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
 
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <input type="file" required name="image" placeholder="Choose image" id="image"
-                                    hidden>
-                            </div>
-                        </div>
-
-                        <label for="image" class="text-center" style="width: 100%">
+                        <label for="image2" class="text-center" style="width: 100%">
                             <div class="col-md-12 mb-2 imagePreviewWrapper">
                                 <img id="preview-image-before-upload" src="../assets/default/defaultImage.png"
                                     alt="preview image" style="max-height: 250px;">
@@ -88,7 +81,7 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="name-name" class="col-form-label">Description:</label>
-                                <textarea type="text" class="form-control" name="description" id="name-name" required></textarea>
+                                <textarea type="text" class="form-control" name="description" id="name-name" required>{{ $classroom->description }}</textarea>
                             </div>
                         </div>
                         <input type="text" name="classroom_id" value="{{ $classroom->id }}" required hidden>
@@ -218,25 +211,5 @@
             });
 
         });
-    $(document).ready(function(e) {
-
-
-        $('#image').change(function() {
-
-            let reader = new FileReader();
-
-            reader.onload = (e) => {
-
-                $('#preview-image-before-upload').attr('src', e.target.result);
-            }
-
-            reader.readAsDataURL(this.files[0]);
-
-        });
-
-    });
-    $(document).ready(function() {
-        $('#customers').DataTable();
-    });
     </script>
 @endsection

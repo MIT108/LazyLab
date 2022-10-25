@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\ObjectiveController;
 use App\Http\Controllers\OfferController;
+use App\Http\Controllers\SubjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,13 +82,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/deleted-users', [InfoUserController::class, 'deletedUsers'])->name('deleted.users');
 
     //class room
-	Route::get('classroom-management',[ClassroomController::class, 'listClassrooms'])->name('classroom-management');
+    Route::get('classroom-management', [ClassroomController::class, 'listClassrooms'])->name('classroom-management');
     Route::post('/create-classroom', [ClassroomController::class, 'createClassroom'])->name('create-classroom');
     Route::get('classroom/suspend/{id}', [ClassroomController::class, 'suspendClassroom'])->name('suspend.classroom');
     Route::get('classroom/activate/{id}', [ClassroomController::class, 'activateClassroom'])->name('activate.classroom');
     Route::get('classroom/delete/{id}', [ClassroomController::class, 'deleteClassroom'])->name('delete.classroom');
     Route::get('classroom/{id}', [ClassroomController::class, 'viewClassroom'])->name('view.classroom');
     Route::get('/deleted-classrooms', [ClassroomController::class, 'deletedClassrooms'])->name('deleted.classrooms');
+
+    //subject
+    Route::post('/create-subject', [SubjectController::class, 'createSubject'])->name('create-subject');
+    Route::get('subject/delete/{id}', [SubjectController::class, 'deleteSubject'])->name('delete.subject');
+    Route::get('subject/{id}', [SubjectController::class, 'viewSubject'])->name('view.subject');
 
     //objective
 	Route::get('objective-management',[ObjectiveController::class, 'listObjectives'])->name('objective-management');
