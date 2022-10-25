@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\LessonController;
+use App\Http\Controllers\LessonDetailController;
 use App\Http\Controllers\ObjectiveController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\SubjectController;
@@ -92,8 +94,21 @@ Route::group(['middleware' => 'auth'], function () {
 
     //subject
     Route::post('/create-subject', [SubjectController::class, 'createSubject'])->name('create-subject');
-    Route::get('subject/delete/{id}', [SubjectController::class, 'deleteSubject'])->name('delete.subject');
+    Route::get('delete-subject/{id}', [SubjectController::class, 'deleteSubject'])->name('delete.subject');
     Route::get('subject/{id}', [SubjectController::class, 'viewSubject'])->name('view.subject');
+
+    //lesson
+    Route::post('/create-lesson', [LessonController::class, 'createLesson'])->name('create-lesson');
+    Route::get('delete-lesson/{id}', [LessonController::class, 'deleteLesson'])->name('delete.lesson');
+    Route::get('lesson/{id}', [LessonController::class, 'viewLesson'])->name('view.lesson');
+
+    //lesson detail
+    Route::post('/create-lesson-detail', [LessonDetailController::class, 'createLessonDetail'])->name('create-lesson-detail');
+    Route::get('delete-lesson-detail/{id}', [LessonDetailController::class, 'deleteLessonDetail'])->name('delete.lesson.detail');
+    Route::get('lesson-detail/{id}', [LessonDetailController::class, 'viewLessonDetail'])->name('view.lesson.detail');
+    Route::post('edit-video-lesson-detail', [LessonDetailController::class, 'editVideoLessonDetail'])->name('edit-video-lesson-detail');
+    Route::post('edit-definition-lesson-detail', [LessonDetailController::class, 'editDefinitionLessonDetail'])->name('edit-definition-lesson-detail');
+    Route::post('edit-course-lesson-detail', [LessonDetailController::class, 'editCourseLessonDetail'])->name('edit-course-lesson-detail');
 
     //objective
 	Route::get('objective-management',[ObjectiveController::class, 'listObjectives'])->name('objective-management');

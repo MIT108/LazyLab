@@ -117,16 +117,6 @@
                                 Name: {{ $classroom->name }}
                             </h4>
                             <p>
-                                Recommended:
-                                @if ($classroom->status == 'active')
-                                    <a href="/recommend-classroom/{{ $classroom->id }}">
-                                        <button class="btn btn-success">Active</button>
-                                    </a>
-                                @else
-                                    <button class="btn btn-danger">In Activex</button>
-                                @endif
-                            </p>
-                            <p>
                                 Description: {{ $classroom->description }}
                             </p>
                             <div class="font-sm">
@@ -159,9 +149,15 @@
                                             <h6 class="mb-0 ">{{ $subject->name }}</h6>
                                             <p class="mb-0 text-xs">{{ $subject->created_at }}</p>
                                         </div>
-                                        <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">
-                                            <a href="/delete-classroom-detail/{{ $subject->id }}" class="mx-3"
-                                                data-bs-toggle="tooltip" data-bs-original-title="View indgredient">
+                                        <a class="btn btn-link ps-0 mb-0 ms-auto" href="javascript:;">
+                                            <a href="/subject/{{ $subject->id }}" class=""
+                                                data-bs-toggle="tooltip" data-bs-original-title="View">
+                                                <button class="btn btn-primary">View</button>
+                                            </a>
+                                        </a>
+                                        <a class="btn btn-link ps-0 mb-0 ms-auto" href="javascript:;">
+                                            <a href="/delete-subject/{{ $subject->id }}" class=""
+                                                data-bs-toggle="tooltip" data-bs-original-title="Delete">
                                                 <button class="btn btn-danger">Delete</button>
                                             </a>
                                         </a>

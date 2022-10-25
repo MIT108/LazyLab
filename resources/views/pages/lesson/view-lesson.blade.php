@@ -14,30 +14,22 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">update {{ $subject->name }}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">update {{ $lesson->name }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <form action="/update-subject" method="post" enctype="multipart/form-data">
+                <form action="/update-lesson" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
-
-
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <img src="{{ $subject->image }}" class="img-fluid border-radius-lg">
-
-                            </div>
-                        </div>
 
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="name-name" class="col-form-label">Description:</label>
-                                <textarea type="text" class="form-control" name="description" id="name-name" required>{{ $subject->description }}</textarea>
+                                <textarea type="text" class="form-control" name="description" id="name-name" required>{{ $lesson->description }}</textarea>
                             </div>
                         </div>
-                        <input type="text" name="subject_id" value="{{ $subject->id }}" required hidden>
+                        <input type="text" name="lesson_id" value="{{ $lesson->id }}" required hidden>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
@@ -54,31 +46,31 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Lesson</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add Lesson Detail</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <form action="/create-lesson" method="post" enctype="multipart/form-data">
+                <form action="/create-lesson-detail" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
 
 
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="name-name" class="col-form-label">Name:</label>
-                                <input type="text" class="form-control" name="name" id="name-name">
+                                <label for="name-name" class="col-form-label">Heading :</label>
+                                <input type="text" class="form-control" name="head" id="name-name" required>
                             </div>
                         </div>
-
 
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="name-name" class="col-form-label">Description:</label>
-                                <textarea type="text" class="form-control" name="description" id="name-name" required></textarea>
+                                <label for="name-name" class="col-form-label">Author :</label>
+                                <input type="text" class="form-control" name="author" id="name-name" required >
                             </div>
                         </div>
-                        <input type="text" name="subject_id" value="{{ $subject->id }}" required hidden>
+
+                        <input type="text" name="lesson_id" value="{{ $lesson->id }}" required hidden>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
@@ -96,18 +88,15 @@
             <div class="row">
                 <div class="col-12 col-xl-8">
                     <div class="card h-100 p-3">
-                        <div class="card-header">
-                            <img src="{{ $subject->image }}" class="img-fluid border-radius-lg">
-                        </div>
                         <div class="card-body px-0 pt-4">
                             <h4>
-                                Name: {{ $subject->name }}
+                                Name: {{ $lesson->name }}
                             </h4>
                             <p>
-                                Description: {{ $subject->description }}
+                                Description: {{ $lesson->description }}
                             </p>
                             <div class="font-sm">
-                                Created Date: {{ $subject->created_at }}
+                                Created Date: {{ $lesson->created_at }}
 
                             </div>
                             <button type="button" data-bs-toggle="modal" data-bs-target="#editIngredient"
@@ -120,34 +109,46 @@
                         <div class="card-header pb-0 p-3">
                             <div class="row">
                                 <div class="col-lg-6 col-7">
-                                    <h6>Subject Detail</h6>
+                                    <h6>Lesson Details</h6>
                                 </div>
                                 <div class="col-lg-6 col-5 my-auto text-end">
                                     <a href="#" class="btn bg-gradient-primary btn-sm mb-3" type="button"
-                                        data-bs-toggle="modal" data-bs-target="#addIngredient">+&nbsp; add lessons</a>
+                                        data-bs-toggle="modal" data-bs-target="#addIngredient">+&nbsp; Add Lesson Detail</a>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body p-3">
                             <ul class="list-group">
-                                @foreach ($subject['lesson'] as $lesson)
-                                    <li class="list-group-item border-0 d-flex align-items-center px-0 ">
+                                @foreach ($lesson['lesson_detail'] as $detail)
+                                    <li class="list-group-item border-0 d-flex align-items-center px-0 d-flex justify-content-between">
                                         <div class="d-flex align-items-start flex-column justify-content-center">
-                                            <h6 class="mb-0 ">{{ $subject->name }}</h6>
-                                            <p class="mb-0 text-xs">{{ $subject->created_at }}</p>
+                                            <h6 class="mb-0 ">{{ $detail->head }}</h6>
+                                            <p class="mb-0 text-xs">Author: {{ $detail->author }}</p>
                                         </div>
-                                        <a class="btn btn-link ps-0 mb-0 ms-auto" href="javascript:;">
-                                            <a href="/lesson/{{ $lesson->id }}" class=""
+                                        {{-- <a class="btn btn-link ps-0 mb-0 ms-auto" href="javascript:;">
+                                            <a href="/lesson-detail/{{ $detail->id }}" class=""
                                                 data-bs-toggle="tooltip" data-bs-original-title="View">
                                                 <button class="btn btn-primary">View</button>
                                             </a>
                                         </a>
                                         <a class="btn btn-link ps-0 mb-0 ms-auto" href="javascript:;">
-                                            <a href="/delete-lesson/{{ $lesson->id }}" class=""
+                                            <a href="/delete-lesson-detail/{{ $detail->id }}" class=""
                                                 data-bs-toggle="tooltip" data-bs-original-title="Delete">
                                                 <button class="btn btn-danger">Delete</button>
                                             </a>
-                                        </a>
+                                        </a> --}}
+                                        <div>
+
+                                            <a href="/lesson-detail/{{ $detail->id }}" class="mx-3" data-bs-toggle="tooltip"
+                                                data-bs-original-title="View detail">
+                                                <i class="fas fa-eye text-secondary"></i>
+                                            </a>
+                                            <a href="/delete-lesson-detail/{{ $detail->id }}" class="mx-3" data-bs-toggle="tooltip"
+                                                data-bs-original-title="Delete detail">
+                                                <i class="cursor-pointer fas fa-trash text-secondary"></i>
+                                            </a>
+                                        </div>
+
                                     </li>
                                 @endforeach
                             </ul>
