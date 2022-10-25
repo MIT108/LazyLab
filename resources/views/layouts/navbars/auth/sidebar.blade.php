@@ -33,7 +33,7 @@
             <li class="nav-item mt-2">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Pages</h6>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link {{ Request::is('user-profile') ? 'active' : '' }} "
                     href="{{ url('user-profile') }}">
                     <div
@@ -63,7 +63,7 @@
                     </div>
                     <span class="nav-link-text ms-1">User Profile</span>
                 </a>
-            </li>
+            </li> --}}
             <li class="nav-item pb-2">
                 <a class="nav-link {{ Request::is('user-management') ? 'active' : '' }}"
                     href="{{ url('user-management') }}">
